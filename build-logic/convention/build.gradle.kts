@@ -19,8 +19,8 @@ tasks.withType<KotlinCompile>().configureEach {
 }
 
 repositories {
-    mavenCentral()
     google()
+    mavenCentral()
 }
 
 dependencies {
