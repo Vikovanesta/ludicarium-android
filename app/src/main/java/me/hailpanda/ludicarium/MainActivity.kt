@@ -34,9 +34,10 @@ import me.hailpanda.ludicarium.core.designSystem.theme.AppTheme
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         setContent {
-            AppTheme {
-                Surface {
+            AppTheme(darkTheme = false) {
+                Surface(color = MaterialTheme.colorScheme.background) {
                     val contentPadding = WindowInsets.systemBars
                         .add(WindowInsets(left = 16.dp, top = 16.dp, right = 16.dp, bottom = 16.dp))
                         .asPaddingValues()
