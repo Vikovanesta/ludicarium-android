@@ -80,7 +80,7 @@ val DarkDefaultColorScheme = darkColorScheme(
 )
 
 @Composable
-fun AppTheme(
+fun LudicariumTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     disableDynamicTheming: Boolean = false,
     content: @Composable () -> Unit
