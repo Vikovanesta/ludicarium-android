@@ -28,23 +28,23 @@ val LightDefaultColorScheme = lightColorScheme(
     onSecondary = LightSalmon90,
     secondaryContainer = LightSalmon40,
     onSecondaryContainer = LightSalmon90,
-    tertiary = Mindaro80,
-    onTertiary = Mindaro10,
+    tertiary = Mindaro70,
+    onTertiary = Mindaro90,
     tertiaryContainer = Mindaro40,
     onTertiaryContainer = Mindaro90,
     error = Red80,
     onError = Red10,
-    errorContainer = Red30,
+    errorContainer = Red40,
     onErrorContainer = Red90,
-    background = Gold90,
-    onBackground = Gold40,
-    surface = Gray90,
+    background = Gray90,
+    onBackground = Gray10,
+    surface = Gray80,
     onSurface = Gray10,
     surfaceVariant = Gray30,
     onSurfaceVariant = Gray80,
     inverseSurface = Gray10,
     inverseOnSurface = Gray90,
-    outline = Gray40,
+    outline = Gray50,
 )
 
 /**
@@ -66,21 +66,21 @@ val DarkDefaultColorScheme = darkColorScheme(
     onTertiaryContainer = Mindaro90,
     error = Red80,
     onError = Red10,
-    errorContainer = Red30,
+    errorContainer = Red40,
     onErrorContainer = Red90,
     background = Gray10,
     onBackground = Gray90,
-    surface = Gray10,
+    surface = Gray20,
     onSurface = Gray90,
-    surfaceVariant = Gray80,
+    surfaceVariant = Gray50,
     onSurfaceVariant = Gray30,
     inverseSurface = Gray90,
     inverseOnSurface = Gray10,
-    outline = Gray40,
+    outline = Gray70,
 )
 
 @Composable
-fun AppTheme(
+fun LudicariumTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     disableDynamicTheming: Boolean = false,
     content: @Composable () -> Unit

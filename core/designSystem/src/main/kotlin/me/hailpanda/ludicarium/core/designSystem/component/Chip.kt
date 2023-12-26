@@ -14,7 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import me.hailpanda.ludicarium.core.designSystem.icon.LudicariumIcon
-import me.hailpanda.ludicarium.core.designSystem.theme.AppTheme
+import me.hailpanda.ludicarium.core.designSystem.theme.LudicariumTheme
 
 /**
  * Ludicarium filter chip with included leading checked icon as well as text content slot.
@@ -93,7 +93,7 @@ fun LudicariumFilterChip(
 @ThemePreviews
 @Composable
 fun ChipPreview() {
-    AppTheme {
+    LudicariumTheme {
         LudicariumBackground(modifier = Modifier.size(80.dp, 20.dp)) {
             LudicariumFilterChip(selected = true, onSelectedChange = {}) {
                 Text(text = "Chip")

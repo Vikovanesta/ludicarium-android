@@ -18,7 +18,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import me.hailpanda.ludicarium.core.designSystem.theme.AppTheme
+import me.hailpanda.ludicarium.core.designSystem.theme.LudicariumTheme
 import me.hailpanda.ludicarium.core.designSystem.theme.GradientColor
 import me.hailpanda.ludicarium.core.designSystem.theme.LocalBackgroundTheme
 import me.hailpanda.ludicarium.core.designSystem.theme.LocalGradientColor
@@ -134,7 +134,7 @@ annotation class ThemePreviews
 @ThemePreviews
 @Composable
 fun BackgroundDefault() {
-    AppTheme(disableDynamicTheming = true) {
+    LudicariumTheme(disableDynamicTheming = true) {
         LudicariumBackground (Modifier.size(100.dp), content = {})
     }
 }
@@ -142,7 +142,7 @@ fun BackgroundDefault() {
 @ThemePreviews
 @Composable
 fun BackgroundDynamic() {
-    AppTheme(disableDynamicTheming = false) {
+    LudicariumTheme(disableDynamicTheming = false) {
         LudicariumBackground (Modifier.size(100.dp), content = {})
     }
 }
@@ -150,7 +150,7 @@ fun BackgroundDynamic() {
 @ThemePreviews
 @Composable
 fun GradientBackgroundDefault() {
-    AppTheme(disableDynamicTheming = true) {
+    LudicariumTheme(disableDynamicTheming = true) {
         LudicariumGradientBackground (Modifier.size(100.dp), content = {})
     }
 }
@@ -158,7 +158,7 @@ fun GradientBackgroundDefault() {
 @ThemePreviews
 @Composable
 fun GradientBackgroundDynamic() {
-    AppTheme(disableDynamicTheming = false) {
+    LudicariumTheme(disableDynamicTheming = false) {
         LudicariumGradientBackground (Modifier.size(100.dp), content = {})
     }
 }

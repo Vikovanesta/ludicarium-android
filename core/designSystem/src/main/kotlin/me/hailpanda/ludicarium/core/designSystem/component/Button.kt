@@ -9,16 +9,20 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.sizeIn
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.FilledIconToggleButton
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import me.hailpanda.ludicarium.core.designSystem.icon.LudicariumIcon
-import me.hailpanda.ludicarium.core.designSystem.theme.AppTheme
+import me.hailpanda.ludicarium.core.designSystem.theme.LudicariumTheme
 
 /**
  * A filled button with generic content slot. Wraps Material 3 [Button].
@@ -41,6 +45,7 @@ fun LudicariumButton(
         onClick = onClick,
         modifier = modifier,
         enabled = enabled,
+        shape = MaterialTheme.shapes.medium,
         colors = ButtonDefaults.buttonColors(
             containerColor = MaterialTheme.colorScheme.primary,
             contentColor = MaterialTheme.colorScheme.onPrimary,
@@ -106,6 +111,7 @@ fun LudicariumOutlinedButton(
         onClick = onClick,
         modifier = modifier,
         enabled = enabled,
+        shape = MaterialTheme.shapes.medium,
         colors = ButtonDefaults.outlinedButtonColors(
             contentColor = MaterialTheme.colorScheme.primary,
         ),
@@ -216,6 +222,49 @@ fun LudicariumTextButton(
 }
 
 /**
+ * A toggle button with icon and checked icon content slots. Wraps Material 3 [IconButton].
+ *
+ * @param checked Whether the toggle button is currently checked.
+ * @param onCheckedChange Called when the user clicks the toggle button and toggles checked.
+ * @param modifier Modifier to be applied to the toggle button.
+ * @param enabled Controls the enabled state of the toggle button. When `false`, this toggle button
+ * will not be clickable and will appear disabled to accessibility services.
+ * @param icon The icon content to show when unchecked.
+ * @param checkedIcon The icon content to show when checked.
+ */
+@Composable
+fun LudicariumIconToggleButton(
+    checked: Boolean,
+    onCheckedChange: (Boolean) -> Unit,
+    modifier: Modifier = Modifier,
+    enabled: Boolean = true,
+    icon: @Composable () -> Unit,
+    checkedIcon: @Composable () -> Unit = icon,
+) {
+    // TODO: File bug
+    // Can't use regular IconToggleButton as it doesn't include a shape (appears square)
+    FilledIconToggleButton(
+        checked = checked,
+        onCheckedChange = onCheckedChange,
+        modifier = modifier,
+        enabled = enabled,
+        colors = IconButtonDefaults.iconToggleButtonColors(
+            checkedContainerColor = MaterialTheme.colorScheme.primary,
+            checkedContentColor = MaterialTheme.colorScheme.onPrimary,
+            disabledContainerColor = if (checked) {
+                MaterialTheme.colorScheme.onBackground.copy(
+                    alpha = LudicariumButtonDefaults.DISABLED_ICON_BUTTON_CONTAINER_ALPHA,
+                )
+            } else {
+                Color.Transparent
+            },
+        ),
+    ) {
+        if (checked) checkedIcon() else icon()
+    }
+}
+
+/**
  * Internal button content layout for arranging the text label and leading icon.
  *
  * @param text The button text label content.
@@ -247,8 +296,8 @@ private fun LudicariumButtonContent(
 
 @ThemePreviews
 @Composable
-fun LudicariumButtonPreview() {
-    AppTheme {
+fun ButtonPreview() {
+    LudicariumTheme {
         LudicariumBackground(modifier = Modifier.size(150.dp, 50.dp)) {
             LudicariumButton(
                 onClick = {},
@@ -260,8 +309,8 @@ fun LudicariumButtonPreview() {
 
 @ThemePreviews
 @Composable
-fun LudicariumOutlinedButtonPreview() {
-    AppTheme {
+fun OutlinedButtonPreview() {
+    LudicariumTheme {
         LudicariumBackground(modifier = Modifier.size(150.dp, 50.dp)) {
             LudicariumOutlinedButton(
                 onClick = {},
@@ -273,13 +322,63 @@ fun LudicariumOutlinedButtonPreview() {
 
 @ThemePreviews
 @Composable
-fun LudicariumButtonLeadingIconPrevies() {
-    AppTheme {
+fun ButtonLeadingIconPreview() {
+    LudicariumTheme {
         LudicariumBackground(modifier = Modifier.size(150.dp, 50.dp,)) {
             LudicariumButton(
                 onClick = {},
                 text = { Text("Button") },
                 leadingIcon = { Icon(imageVector = LudicariumIcon.Add, contentDescription = null) },
+            )
+        }
+    }
+}
+
+@ThemePreviews
+@Composable
+fun IconButtonPreview() {
+    LudicariumTheme {
+        LudicariumBackground(modifier = Modifier.size(50.dp, 50.dp)) {
+            LudicariumIconToggleButton(
+                checked = true,
+                onCheckedChange = { },
+                icon = {
+                    Icon(
+                        imageVector = LudicariumIcon.BookmarkBorder,
+                        contentDescription = null,
+                    )
+                },
+                checkedIcon = {
+                    Icon(
+                        imageVector = LudicariumIcon.Bookmark,
+                        contentDescription = null,
+                    )
+                },
+            )
+        }
+    }
+}
+
+@ThemePreviews
+@Composable
+fun IconButtonUncheckedPreview() {
+    LudicariumTheme {
+        LudicariumBackground(modifier = Modifier.size(50.dp, 50.dp)) {
+            LudicariumIconToggleButton(
+                checked = false,
+                onCheckedChange = { },
+                icon = {
+                    Icon(
+                        imageVector = LudicariumIcon.BookmarkBorder,
+                        contentDescription = null,
+                    )
+                },
+                checkedIcon = {
+                    Icon(
+                        imageVector = LudicariumIcon.Bookmark,
+                        contentDescription = null,
+                    )
+                },
             )
         }
     }
@@ -292,6 +391,10 @@ object LudicariumButtonDefaults {
     // TODO: File bug
     // OutlinedButton border color doesn't respect disabled state by default
     const val DISABLED_OUTLINED_BUTTON_BORDER_ALPHA = 0.12f
+
+    // TODO: File bug
+    // IconToggleButton disabled container alpha not exposed by IconButtonDefaults
+    const val DISABLED_ICON_BUTTON_CONTAINER_ALPHA = 0.12f
 
     // TODO: File bug
     // OutlinedButton default border width isn't exposed via ButtonDefaults
